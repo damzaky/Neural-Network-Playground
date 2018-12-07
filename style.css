@@ -6,6 +6,12 @@ body{
 h1,h2{
     color:#dedef3;
 }
+a{
+    color: #3b83a0;
+}
+a:hover{
+    color: #15bbff;
+}
 .svg-box-content{
     position:relative;
 }
