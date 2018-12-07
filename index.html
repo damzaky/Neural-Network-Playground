@@ -1,0 +1,316 @@
+<html>
+    <head>
+        <title>Neural Network Playground</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+        <div id='main'>
+            <div class='section'>
+                <h1>Configuration</h1>
+                <p>
+                    The dataset that is used here is logical OR with features x1 and x2. Below is truth table of OR, You can edit it all you want though. Put epoch as high as you want, overfitting here is good since ALL possible data is already defined in the dataset (that is if you haven't edited it).
+                </p>
+                <div id='conf'>
+                    <table id='inputable'>
+                        <tr>
+                          <th colspan='3'>Dataset</th>
+                      </tr>
+                      <tr>
+                        <th>X1</th>
+                        <th>X2</th>
+                        <th>Y</th>
+                      </tr>
+                      <tr>
+                        <td><input id='r1x1' type='text' value='0'></input></td>
+                        <td><input id='r1x2' type='text' value='0'></input></td>
+                        <td><input id='r1y' type='text' value='0'></input></td>
+                      </tr>
+                      <tr>
+                          <td><input id='r2x1' type='text' value='0'></input></td>
+                          <td><input id='r2x2' type='text' value='1'></input></td>
+                          <td><input id='r2y' type='text' value='1'></input></td>
+                      </tr>
+                      <tr>
+                          <td><input id='r3x1' type='text' value='1'></input></td>
+                          <td><input id='r3x2' type='text' value='0'></input></td>
+                          <td><input id='r3y' type='text' value='1'></input></td>
+                      </tr>
+                      <tr>
+                          <td><input id='r4x1' type='text' value='1'></input></td>
+                          <td><input id='r4x2' type='text' value='1'></input></td>
+                          <td><input id='r4y' type='text' value='1'></input></td>
+                      </tr>
+                    </table>
+                    <table id='conftable'>
+                      <tr >
+                        <th colspan='3'>Parameters</th>
+                      </tr>
+                      <tr>
+                        <th>learning rate</th>
+                        <th>epoch</th>
+                        <th>hidden neurons</th>
+                      </tr>
+                      <tr>
+                        <td><input id='alph' type='text' value='0.1'></input></td>
+                        <td><input id='epoch' type='text' value='10000'></input></td>
+                        <td><input id='hneu' type='text' value='3'></input></td>
+                      </tr>
+                    </table>
+                    <div class='clear'></div>
+                </div>
+                Hit start button to start training process. Please note, switching browser tab might cause a little lag.
+                <div class='clear'></div>
+            </div>
+            <h1>Training</h1>
+            <div style="margin: 30px 0;">
+                <button id='starter'>Start</button>
+                <button id='stopper'>Stop</button>
+            </div>
+            <div id='infobox'><div>Error: <span id='test'>N/A</span></div><div>Epoch: <span id='epoh'>N/A</span></div></div>
+            <svg class="svg-box-content" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0, 0, 600, 335">
+                <!-- <line x1="0" y1="0" x2="200" y2="200" style="stroke:#0c9cd7;stroke-width:2" />
+                <circle cx="50" cy="145" r="40" stroke="#0c9cd8" stroke-width="5" fill="yellow"></circle>
+                <text x="50%" y="50%" text-anchor="middle" stroke="#51c5cf" stroke-width="2px" dy=".3em">Look, I’m centered!Look, I’m centered!</text>
+                <circle cx="50" cy="205" r="40" stroke="#0c9cd8" stroke-width="5" fill="yellow" /> -->
+                <svg style="overflow: visible" x="93" y="110">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <line id='x0h0' x1="0" y1="0" x2="207" y2="-60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='x0h1' x1="0" y1="0" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='x0h2' x1="0" y1="0" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="0" r="40"/>
+
+                        <text x="-70" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>X1</text>
+
+                        <text id='x10' x="0" y="-12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x11' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x12' x="0" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x13' x="0" y="24" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <line id='x1h0' x1="0" y1="120" x2="207" y2="-60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='x1h1' x1="0" y1="120" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='x1h2' x1="0" y1="120" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="120" r="40" />
+
+                        <text x="-70" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>X2</text>
+
+                        <text id='x20' x="0" y="108" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x21' x="0" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x22' x="0" y="132" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='x23' x="0" y="144" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+
+                    </g>
+                </svg>
+                <svg style="overflow: visible" x="50%" y="50">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <line id='h0y0' x1="0" y1="0" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='h0y1' x1="0" y1="0" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="0" r="40"/>
+                        <text id='h10' x="0" y="-12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h11' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h12' x="0" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h13' x="0" y="24" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <line id='h1y0' x1="0" y1="120" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='h1y1' x1="0" y1="120" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="120" r="40"/>
+                        <text id='h20' x="0" y="108" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h21' x="0" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h22' x="0" y="132" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h23' x="0" y="144" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <line id='h2y0' x1="0" y1="240" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='h2y1' x1="0" y1="240" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="240" r="40"/>
+                        <text id='h30' x="0" y="228" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h31' x="0" y="240" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h32' x="0" y="252" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='h33' x="0" y="264" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    </g>
+                </svg>
+                <svg style="overflow: visible" x="507" y="110" width="40">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <circle cx="0" cy="0" r="40"/>
+                        <text id='y10' x="0" y="-12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y11' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y12' x="0" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y13' x="0" y="24" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+
+                        <text x="70" y="-36" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>Y</text>
+
+                        <text x="50" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>T</text>
+                        <text id='xy10' x="70" y="-12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>0</text>
+                        <text id='xy11' x="70" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>1</text>
+                        <text id='xy12' x="70" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>1</text>
+                        <text id='xy13' x="70" y="24" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>1</text>
+
+                        <circle cx="0" cy="120" r="40"/>
+                        <text id='y20' x="0" y="108" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y21' x="0" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y22' x="0" y="132" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <text id='y23' x="0" y="144" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+
+                        <text x="50" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>F</text>
+
+                        <text id='xy20' x="70" y="108" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>1</text>
+                        <text id='xy21' x="70" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>0</text>
+                        <text id='xy22' x="70" y="132" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>0</text>
+                        <text id='xy23' x="70" y="144" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'>0</text>
+                    </g>
+                </svg>
+                Sorry, your browser does not support inline SVG.
+            </svg>
+            <div id='tables'>
+                <table style='float:left;margin-right:30px;'>
+                  <tr>
+                    <th>X1</th>
+                    <th>X2</th>
+                    <th>expected Y</th>
+                    <th>predicted Y</th>
+                  </tr>
+                  <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td id='exy1'></td>
+                    <td id='y1'></td>
+                  </tr>
+                  <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td id='exy2'></td>
+                    <td id='y2'></td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td id='exy3'></td>
+                    <td id='y3'></td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td id='exy4'></td>
+                    <td id='y4'></td>
+                  </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th colspan="5">Matrices</th>
+                    </tr>
+                  <tr>
+                    <th>input layer</th>
+                    <th>weight 1</th>
+                    <th>hidden layer</th>
+                    <th>weight 2</th>
+                    <th>output layer</th>
+                  </tr>
+                  <tr>
+                    <td>
+                        <div id='layer1z' class='layer'>
+                            <div>[<span id='x00m'></span> <span id='x10m'></span>]</div>
+                            <div>[<span id='x01m'></span> <span id='x11m'></span>]</div>
+                            <div>[<span id='x02m'></span> <span id='x12m'></span>]</div>
+                            <div>[<span id='x03m'></span> <span id='x13m'></span>]</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id='bet1' class='layer'>
+                            <div>[<span id='w100m'>0</span> <span id='w110m'>0</span> <span id='w120m'>0</span>]</div>
+                            <div>[<span id='w101m'>0</span> <span id='w111m'>0</span> <span id='w121m'>0</span>]</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id='layer2z' class='layer'>
+                            <div>[<span id='h00m'>0</span> <span id='h10m'>0</span> <span id='h20m'>0</span>]</div>
+                            <div>[<span id='h01m'>0</span> <span id='h11m'>0</span> <span id='h21m'>0</span>]</div>
+                            <div>[<span id='h02m'>0</span> <span id='h12m'>0</span> <span id='h22m'>0</span>]</div>
+                            <div>[<span id='h03m'>0</span> <span id='h13m'>0</span> <span id='h23m'>0</span>]</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id='bet2' class='layer'>
+                            <div>[<span id='w200m'>0</span> <span id='w210m'>0</span>]</div>
+                            <div>[<span id='w201m'>0</span> <span id='w211m'>0</span>]</div>
+                            <div>[<span id='w202m'>0</span> <span id='w212m'>0</span>]</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div id='layer3z' class='layer'>
+                            <div>[<span id='y00m'>0</span> <span id='y10m'>0</span>]</div>
+                            <div>[<span id='y01m'>0</span> <span id='y11m'>0</span>]</div>
+                            <div>[<span id='y02m'>0</span> <span id='y12m'>0</span>]</div>
+                            <div>[<span id='y03m'>0</span> <span id='y13m'>0</span>]</div>
+                        </div>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+
+            <h1>Testing</h1>
+            This is a live testing, you can do it before or after the training process ends. Type in an input on the text input with blue underline.
+            <svg class="svg-box-content" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewbox="0, 0, 500, 335">
+                <!-- <line x1="0" y1="0" x2="200" y2="200" style="stroke:#0c9cd7;stroke-width:2" />
+                <circle cx="50" cy="145" r="40" stroke="#0c9cd8" stroke-width="5" fill="yellow"></circle>
+                <text x="50%" y="50%" text-anchor="middle" stroke="#51c5cf" stroke-width="2px" dy=".3em">Look, I’m centered!Look, I’m centered!</text>
+                <circle cx="50" cy="205" r="40" stroke="#0c9cd8" stroke-width="5" fill="yellow" /> -->
+                <svg style="overflow: visible" x="43" y="110">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <line id='tx0h0' x1="0" y1="0" x2="207" y2="-60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='tx0h1' x1="0" y1="0" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='tx0h2' x1="0" y1="0" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="0" r="40"/>
+                        <foreignObject x="-15" y="-15" width="30" height="30">
+                              <div xmlns="http://www.w3.org/1999/xhtml"><input type='text' id='x0i' class='xi'></input></div>
+                        </foreignObject>
+                        <line id='tx1h0' x1="0" y1="120" x2="207" y2="-60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='tx1h1' x1="0" y1="120" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='tx1h2' x1="0" y1="120" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="120" r="40" />
+                        <foreignObject x="-15" y="105" width="30" height="30">
+                              <div xmlns="http://www.w3.org/1999/xhtml"><input type='text' id='x1i' class='xi'></input></div>
+                        </foreignObject>
+
+                    </g>
+                </svg>
+                <svg style="overflow: visible" x="50%" y="50">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <line id='th0y0' x1="0" y1="0" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='th0y1' x1="0" y1="0" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="0" r="40"/>
+                        <text id='th10' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <line id='th1y0' x1="0" y1="120" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='th1y1' x1="0" y1="120" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="120" r="40"/>
+                        <text id='th20' x="0" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <line id='th2y0' x1="0" y1="240" x2="207" y2="60" style="stroke:#0c9cd7;stroke-width:2" />
+                        <line id='th2y1' x1="0" y1="240" x2="207" y2="180" style="stroke:#0c9cd7;stroke-width:2" />
+                        <circle cx="0" cy="240" r="40"/>
+                        <text id='th30' x="0" y="240" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    </g>
+                </svg>
+                <svg style="overflow: visible" x="457" y="110" width="40">
+                    <g fill="#1B1B1B" stroke="#0c9cd8" stroke-width="3">
+                        <circle cx="0" cy="0" r="40"/>
+                        <text id='ty10' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                        <circle cx="0" cy="120" r="40"/>
+                        <text id='ty20' x="0" y="120" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    </g>
+                </svg>
+                <svg style="overflow: visible" x="325" y="30">
+                    <text id='xin1l' x="0" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    <text id='xin1' x="0" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+
+                    <text id='xin2l' x="30" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    <text id='xin2' x="30" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+
+                    <text id='youtl' x="60" y="0" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                    <text id='yout' x="60" y="12" fill="#fff" font-size="11px" text-anchor="middle" style='stroke-width:0'></text>
+                </svg>
+                Sorry, your browser does not support inline SVG.
+            </svg>
+        <h1>About this playground</h1>
+        <p>
+            There are many things that I haven't implemented here like bias or adding neurons or hidden layers and many more. If you wish to contribute, please pull request this repository.
+        </p>
+        </div>
+
+        <script type='text/javascript' src='math.js'></script>
+        <script type='text/javascript' src='neuralnetwork.js'></script>
+    </body>
+</html>
