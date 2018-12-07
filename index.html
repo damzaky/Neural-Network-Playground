@@ -9,7 +9,7 @@
             <div class='section'>
                 <h2>Configuration</h2>
                 <p>
-                    The dataset that is used here is logical OR with features x1 and x2. Below is truth table of OR, You can edit it all you want though. Put epoch as high as you want, overfitting here is good since ALL possible data is already defined in the dataset (that is if you haven't edited it).
+                    The neural network here is to solve classification problem. The dataset that is used here is logical OR with features x1 and x2. Below is truth table of OR, You can edit it all you want though. Put epoch as high as you want, overfitting here is good since ALL possible data is already defined in the dataset (that is if you haven't edited it).
                 </p>
                 <div id='conf'>
                     <table id='inputable'>
@@ -44,22 +44,26 @@
                     </table>
                     <table id='conftable'>
                       <tr >
-                        <th colspan='3'>Parameters</th>
+                        <th colspan='5'>Parameters</th>
                       </tr>
                       <tr>
                         <th>learning rate</th>
                         <th>epoch</th>
                         <th>hidden neurons</th>
+                        <th>hidden layers</th>
+                        <th>biases</th>
                       </tr>
                       <tr>
                         <td><input id='alph' type='text' value='0.1'></input></td>
                         <td><input id='epoch' type='text' value='10000'></input></td>
                         <td><input id='hneu' type='text' value='3'></input></td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     </table>
                     <div class='clear'></div>
                 </div>
-                Hit start button to start training process. Please note, switching browser tab might cause a little lag.
+                Hit the start button to start training process. Please note, switching browser tab might cause a little lag.
                 <div class='clear'></div>
             </div>
             <h2>Training</h2>
