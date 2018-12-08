@@ -448,7 +448,7 @@ function derivato(x){
 var req
 var te = document.getElementById('test');
 var epoh = document.getElementById('epoh');
-
+var mini2,minro2,mini1,minro1,small
 function update(){
     lay1=math.multiply(X,W1)
 
@@ -510,10 +510,10 @@ function update(){
     // wzc1m.innerHTML = W1.get([0,0]).toFixed(4)
 
     w100m.innerHTML = W1.get([0,0]).toFixed(2)
-    w101m.innerHTML = W1.get([0,1]).toFixed(2)
-    w110m.innerHTML = W1.get([0,2]).toFixed(2)
-    w111m.innerHTML = W1.get([1,0]).toFixed(2)
-    w120m.innerHTML = W1.get([1,1]).toFixed(2)
+    w110m.innerHTML = W1.get([0,1]).toFixed(2)
+    w120m.innerHTML = W1.get([0,2]).toFixed(2)
+    w101m.innerHTML = W1.get([1,0]).toFixed(2)
+    w111m.innerHTML = W1.get([1,1]).toFixed(2)
     w121m.innerHTML = W1.get([1,2]).toFixed(2)
 
     h00m.innerHTML = lay1.get([0,2]).toFixed(2)
@@ -530,10 +530,10 @@ function update(){
     h23m.innerHTML = lay1.get([3,1]).toFixed(2)
 
     w200m.innerHTML = W2.get([0,0]).toFixed(2)
-    w201m.innerHTML = W2.get([0,1]).toFixed(2)
-    w202m.innerHTML = W2.get([1,0]).toFixed(2)
-    w210m.innerHTML = W2.get([1,1]).toFixed(2)
-    w211m.innerHTML = W2.get([2,0]).toFixed(2)
+    w210m.innerHTML = W2.get([0,1]).toFixed(2)
+    w201m.innerHTML = W2.get([1,0]).toFixed(2)
+    w211m.innerHTML = W2.get([1,1]).toFixed(2)
+    w202m.innerHTML = W2.get([2,0]).toFixed(2)
     w212m.innerHTML = W2.get([2,1]).toFixed(2)
 
     y00m.innerHTML = lay2.get([0,0]).toFixed(2)
@@ -613,31 +613,42 @@ function update(){
     // lay2.get([2,0])<lay2.get([2,1]) ? y12.setAttribute("fill", "#999") : y22.setAttribute("fill", "#999")
     // lay2.get([3,0])<lay2.get([3,1]) ? y13.setAttribute("fill", "#999") : y23.setAttribute("fill", "#999")
 
-    x0h0.style.strokeWidth=W1.get([0,0]);
-    x0h1.style.strokeWidth=W1.get([0,1]);
-    x0h2.style.strokeWidth=W1.get([0,2]);
-    x1h0.style.strokeWidth=W1.get([1,0]);
-    x1h1.style.strokeWidth=W1.get([1,1]);
-    x1h2.style.strokeWidth=W1.get([1,2]);
-    h0y0.style.strokeWidth=W2.get([0,0]);
-    h0y1.style.strokeWidth=W2.get([0,1]);
-    h1y0.style.strokeWidth=W2.get([1,0]);
-    h1y1.style.strokeWidth=W2.get([1,1]);
-    h2y0.style.strokeWidth=W2.get([2,0]);
-    h2y1.style.strokeWidth=W2.get([2,1]);
+    minro1 = W1.valueOf().map(function(row){ return Math.min.apply(Math, row); });
+    mini1 = Math.min.apply(null, minro1);
+    minro2 = W2.valueOf().map(function(row){ return Math.min.apply(Math, row); });
+    mini2 = Math.min.apply(null, minro2);
+    // console.log('miniw1',mini1)
+    // console.log('miniw2',mini2)
+    small = Math.abs(Math.min(mini1,mini2))+0.5
+    // console.log('small',small)
+    // console.log(W1.get([0,0])+small)
+    // console.log(W1.get([0,1])+small)
+    // console.log(W1.get([0,2])+small)
+    x0h0.style.strokeWidth=W1.get([0,0])+small;
+    x0h1.style.strokeWidth=W1.get([0,1])+small;
+    x0h2.style.strokeWidth=W1.get([0,2])+small;
+    x1h0.style.strokeWidth=W1.get([1,0])+small;
+    x1h1.style.strokeWidth=W1.get([1,1])+small;
+    x1h2.style.strokeWidth=W1.get([1,2])+small;
+    h0y0.style.strokeWidth=W2.get([0,0])+small;
+    h0y1.style.strokeWidth=W2.get([0,1])+small;
+    h1y0.style.strokeWidth=W2.get([1,0])+small;
+    h1y1.style.strokeWidth=W2.get([1,1])+small;
+    h2y0.style.strokeWidth=W2.get([2,0])+small;
+    h2y1.style.strokeWidth=W2.get([2,1])+small;
 
-    tx0h0.style.strokeWidth=W1.get([0,0]);
-    tx0h1.style.strokeWidth=W1.get([0,1]);
-    tx0h2.style.strokeWidth=W1.get([0,2]);
-    tx1h0.style.strokeWidth=W1.get([1,0]);
-    tx1h1.style.strokeWidth=W1.get([1,1]);
-    tx1h2.style.strokeWidth=W1.get([1,2]);
-    th0y0.style.strokeWidth=W2.get([0,0]);
-    th0y1.style.strokeWidth=W2.get([0,1]);
-    th1y0.style.strokeWidth=W2.get([1,0]);
-    th1y1.style.strokeWidth=W2.get([1,1]);
-    th2y0.style.strokeWidth=W2.get([2,0]);
-    th2y1.style.strokeWidth=W2.get([2,1]);
+    tx0h0.style.strokeWidth=W1.get([0,0])+small;
+    tx0h1.style.strokeWidth=W1.get([0,1])+small;
+    tx0h2.style.strokeWidth=W1.get([0,2])+small;
+    tx1h0.style.strokeWidth=W1.get([1,0])+small;
+    tx1h1.style.strokeWidth=W1.get([1,1])+small;
+    tx1h2.style.strokeWidth=W1.get([1,2])+small;
+    th0y0.style.strokeWidth=W2.get([0,0])+small;
+    th0y1.style.strokeWidth=W2.get([0,1])+small;
+    th1y0.style.strokeWidth=W2.get([1,0])+small;
+    th1y1.style.strokeWidth=W2.get([1,1])+small;
+    th2y0.style.strokeWidth=W2.get([2,0])+small;
+    th2y1.style.strokeWidth=W2.get([2,1])+small;
 }
 function loop(time) {
     // req = undefined
